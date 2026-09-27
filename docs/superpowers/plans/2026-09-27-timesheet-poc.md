@@ -496,7 +496,7 @@ git commit -m "feat: TimeSlot with same-day and overlap rules"
   - `NotFoundException(String)` → 404, `OverlapException(String)` → 409, `InvalidTimeSlotException` → 400, błędy formatu/walidacji → 400. Ciało błędu: `{"message": "..."}`.
   - JSON wpisu: `{"id": 1, "projectId": 1, "date": "2026-09-29", "start": "09:00", "end": "13:00"}`; ciało żądania bez `id`.
 
-- [ ] **Step 1: Napisz testy, które padają**
+- [x] **Step 1: Napisz testy, które padają**
 
 `backend/src/test/java/pl/dawid/timesheet/entry/TimeEntryApiTest.java`:
 
@@ -639,12 +639,12 @@ class TimeEntryApiTest {
 }
 ```
 
-- [ ] **Step 2: Uruchom testy i potwierdź, że padają**
+- [x] **Step 2: Uruchom testy i potwierdź, że padają**
 
 Run: `cd backend && ./gradlew test --tests '*TimeEntryApiTest'`
 Expected: FAIL — błąd kompilacji `cannot find symbol: class TimeEntryRepository`.
 
-- [ ] **Step 3: Dodaj migrację tabeli wpisów**
+- [x] **Step 3: Dodaj migrację tabeli wpisów**
 
 `backend/src/main/resources/db/changelog/schema/002-time-entry.sql`:
 
@@ -664,7 +664,7 @@ create table time_entry (
 create index time_entry_work_date_idx on time_entry (work_date);
 ```
 
-- [ ] **Step 4: Dodaj encję, repozytorium i wyjątki**
+- [x] **Step 4: Dodaj encję, repozytorium i wyjątki**
 
 `backend/src/main/java/pl/dawid/timesheet/entry/TimeEntry.java`:
 
@@ -777,7 +777,7 @@ public class OverlapException extends RuntimeException {
 }
 ```
 
-- [ ] **Step 5: Dodaj serwis (dodawanie i lista)**
+- [x] **Step 5: Dodaj serwis (dodawanie i lista)**
 
 `backend/src/main/java/pl/dawid/timesheet/entry/TimeEntryService.java`:
 
@@ -835,7 +835,7 @@ public class TimeEntryService {
 }
 ```
 
-- [ ] **Step 6: Dodaj kontroler i mapowanie błędów**
+- [x] **Step 6: Dodaj kontroler i mapowanie błędów**
 
 `backend/src/main/java/pl/dawid/timesheet/entry/TimeEntryController.java`:
 
@@ -966,12 +966,12 @@ class ApiExceptionHandler {
 }
 ```
 
-- [ ] **Step 7: Uruchom wszystkie testy i potwierdź, że przechodzą**
+- [x] **Step 7: Uruchom wszystkie testy i potwierdź, że przechodzą**
 
 Run: `cd backend && ./gradlew test`
 Expected: PASS — 17 testów (1 context + 1 projekty + 7 TimeSlot + 8 TimeEntryApi).
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 cd /home/dawid/projects/pomysly/poc/timesheet
