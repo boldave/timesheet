@@ -1255,7 +1255,7 @@ git commit -m "feat: update and delete time entries"
   - `time.ts`: `toIsoDate(d: Date): string`, `toHHmm(d: Date): string`, `withinOneDay(start: Date, end: Date): boolean`.
   - `Timesheet.tsx`: `export function Timesheet({ projects }: { projects: Project[] })`.
 
-- [ ] **Step 1: Wygeneruj szkielet Vite i usuń demo**
+- [x] **Step 1: Wygeneruj szkielet Vite i usuń demo**
 
 ```bash
 cd /home/dawid/projects/pomysly/poc/timesheet
@@ -1267,7 +1267,7 @@ npm install
 npm install --save-exact @fullcalendar/core@6.1.21 @fullcalendar/react@6.1.21 @fullcalendar/daygrid@6.1.21 @fullcalendar/timegrid@6.1.21 @fullcalendar/interaction@6.1.21
 ```
 
-- [ ] **Step 2: Ustaw HTML, proxy i punkt wejścia**
+- [x] **Step 2: Ustaw HTML, proxy i punkt wejścia**
 
 `frontend/index.html` (cały plik):
 
@@ -1318,7 +1318,7 @@ createRoot(document.getElementById('root')!).render(
 )
 ```
 
-- [ ] **Step 3: Dodaj klienta API i pomocnicze funkcje czasu**
+- [x] **Step 3: Dodaj klienta API i pomocnicze funkcje czasu**
 
 `frontend/src/api.ts`:
 
@@ -1393,7 +1393,7 @@ export function withinOneDay(start: Date, end: Date): boolean {
 }
 ```
 
-- [ ] **Step 4: Dodaj kalendarz (na razie tylko wyświetlanie) i `App`**
+- [x] **Step 4: Dodaj kalendarz (na razie tylko wyświetlanie) i `App`**
 
 `frontend/src/Timesheet.tsx`:
 
@@ -1522,12 +1522,12 @@ h1 {
 }
 ```
 
-- [ ] **Step 5: Sprawdź typy i build**
+- [x] **Step 5: Sprawdź typy i build**
 
 Run: `cd frontend && npm run build`
 Expected: `tsc -b` bez błędów, `✓ built in ...`.
 
-- [ ] **Step 6: Dodaj README z instrukcją uruchomienia**
+- [x] **Step 6: Dodaj README z instrukcją uruchomienia**
 
 `README.md` (katalog główny repo):
 
@@ -1573,7 +1573,7 @@ cd frontend && npm run build   # sprawdzenie typów
    Expected: polskie nazwy dni, tydzień od poniedziałku, godziny 24h; we wtorek 29.09 niebieski blok „Basketo" 09:00–13:00.
 4. Zatrzymaj oba procesy (Ctrl+C).
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 cd /home/dawid/projects/pomysly/poc/timesheet
