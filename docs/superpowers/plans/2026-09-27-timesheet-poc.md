@@ -349,7 +349,7 @@ git commit -m "feat: seeded projects and GET /api/projects"
   - `public record TimeSlot(LocalTime start, LocalTime end)` — konstruktor rzuca `InvalidTimeSlotException`, gdy któraś godzina jest `null` albo `end` nie jest po `start`; `public boolean overlaps(TimeSlot other)` — `true` tylko przy części wspólnej dłuższej niż zero (stykające się sloty nie nachodzą).
   - `public class InvalidTimeSlotException extends RuntimeException` z konstruktorem `(String message)`; komunikaty po polsku, trafiają do UI przez 400 (Task 4).
 
-- [ ] **Step 1: Napisz testy, które padają**
+- [x] **Step 1: Napisz testy, które padają**
 
 `backend/src/test/java/pl/dawid/timesheet/entry/TimeSlotTest.java`:
 
@@ -413,12 +413,12 @@ class TimeSlotTest {
 }
 ```
 
-- [ ] **Step 2: Uruchom testy i potwierdź, że padają**
+- [x] **Step 2: Uruchom testy i potwierdź, że padają**
 
 Run: `cd backend && ./gradlew test --tests '*TimeSlotTest'`
 Expected: FAIL — błąd kompilacji `cannot find symbol: class TimeSlot`.
 
-- [ ] **Step 3: Zaimplementuj `TimeSlot` i wyjątek**
+- [x] **Step 3: Zaimplementuj `TimeSlot` i wyjątek**
 
 `backend/src/main/java/pl/dawid/timesheet/entry/InvalidTimeSlotException.java`:
 
@@ -459,12 +459,12 @@ public record TimeSlot(LocalTime start, LocalTime end) {
 }
 ```
 
-- [ ] **Step 4: Uruchom testy i potwierdź, że przechodzą**
+- [x] **Step 4: Uruchom testy i potwierdź, że przechodzą**
 
 Run: `cd backend && ./gradlew test --tests '*TimeSlotTest'`
 Expected: PASS — 7 testów.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd /home/dawid/projects/pomysly/poc/timesheet
