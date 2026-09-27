@@ -34,6 +34,23 @@ public class TimeEntryService {
         return entries.save(new TimeEntry(projectId, date, slot));
     }
 
+    @Transactional
+    public TimeEntry update(Long id, Long projectId, LocalDate date, TimeSlot slot) {
+        TimeEntry entry = entries.findById(id)
+                .orElseThrow(() -> new NotFoundException("Nie ma takiego wpisu."));
+        requireProject(projectId);
+        requireNoOverlap(date, slot, id);
+        entry.change(projectId, date, slot);
+        return entry;
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        TimeEntry entry = entries.findById(id)
+                .orElseThrow(() -> new NotFoundException("Nie ma takiego wpisu."));
+        entries.delete(entry);
+    }
+
     private void requireProject(Long projectId) {
         if (!projects.existsById(projectId)) {
             throw new NotFoundException("Nie ma takiego projektu.");

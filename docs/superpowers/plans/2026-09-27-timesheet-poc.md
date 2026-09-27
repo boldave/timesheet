@@ -992,7 +992,7 @@ git commit -m "feat: create and list time entries with overlap check"
 - Consumes: wszystko z Task 4.
 - Produces: `TimeEntry update(Long id, Long projectId, LocalDate date, TimeSlot slot)`, `void delete(Long id)` w `TimeEntryService`; `PUT /api/entries/{id}` → 200 + wpis, `DELETE /api/entries/{id}` → 204; nieznany wpis → 404 „Nie ma takiego wpisu.". Frontend (Task 6–7) korzysta z pełnego API.
 
-- [ ] **Step 1: Dopisz testy, które padają**
+- [x] **Step 1: Dopisz testy, które padają**
 
 W `TimeEntryApiTest.java` dodaj importy obok istniejących:
 
@@ -1055,12 +1055,12 @@ i dopisz w klasie cztery testy:
     }
 ```
 
-- [ ] **Step 2: Uruchom testy i potwierdź, że padają**
+- [x] **Step 2: Uruchom testy i potwierdź, że padają**
 
 Run: `cd backend && ./gradlew test --tests '*TimeEntryApiTest'`
 Expected: FAIL — 4 nowe testy padają (brak obsługi `PUT`/`DELETE`, więc zły status albo brak `$.message` w odpowiedzi); 8 testów z Task 4 przechodzi.
 
-- [ ] **Step 3: Dopisz `update` i `delete` w serwisie**
+- [x] **Step 3: Dopisz `update` i `delete` w serwisie**
 
 `backend/src/main/java/pl/dawid/timesheet/entry/TimeEntryService.java` (cały plik):
 
@@ -1135,7 +1135,7 @@ public class TimeEntryService {
 }
 ```
 
-- [ ] **Step 4: Dopisz endpointy w kontrolerze**
+- [x] **Step 4: Dopisz endpointy w kontrolerze**
 
 `backend/src/main/java/pl/dawid/timesheet/entry/TimeEntryController.java` (cały plik):
 
@@ -1224,12 +1224,12 @@ class TimeEntryController {
 }
 ```
 
-- [ ] **Step 5: Uruchom wszystkie testy i potwierdź, że przechodzą**
+- [x] **Step 5: Uruchom wszystkie testy i potwierdź, że przechodzą**
 
 Run: `cd backend && ./gradlew test`
 Expected: PASS — 21 testów (1 context + 1 projekty + 7 TimeSlot + 12 TimeEntryApi).
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd /home/dawid/projects/pomysly/poc/timesheet

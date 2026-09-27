@@ -1,7 +1,9 @@
 package pl.dawid.timesheet.entry;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -132,5 +134,55 @@ class TimeEntryApiTest {
         mvc.perform(get("/api/entries").param("from", "2026-09-28")).andExpect(status().isBadRequest());
         mvc.perform(get("/api/entries").param("from", "wczoraj").param("to", "2026-09-28"))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void entryGoesThroughItsWholeLife() throws Exception {
+        long id = createdId(body(BASKETO, "2026-09-29", "09:00", "13:00"));
+
+        mvc.perform(put("/api/entries/{id}", id).contentType(MediaType.APPLICATION_JSON)
+                        .content(body(HOTELERO, "2026-09-30", "10:15", "12:45")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.projectId").value(HOTELERO))
+                .andExpect(jsonPath("$.date").value("2026-09-30"))
+                .andExpect(jsonPath("$.start").value("10:15"))
+                .andExpect(jsonPath("$.end").value("12:45"));
+
+        mvc.perform(get("/api/entries").param("from", "2026-09-28").param("to", "2026-10-05"))
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].date").value("2026-09-30"));
+
+        mvc.perform(delete("/api/entries/{id}", id)).andExpect(status().isNoContent());
+
+        mvc.perform(get("/api/entries").param("from", "2026-09-28").param("to", "2026-10-05"))
+                .andExpect(jsonPath("$.length()").value(0));
+    }
+
+    @Test
+    void entryMayBeChangedOverItsOwnHours() throws Exception {
+        long id = createdId(body(BASKETO, "2026-09-29", "09:00", "13:00"));
+
+        mvc.perform(put("/api/entries/{id}", id).contentType(MediaType.APPLICATION_JSON)
+                        .content(body(BASKETO, "2026-09-29", "10:00", "14:00")))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void changingAnEntryOntoAnotherIsRefused() throws Exception {
+        createdId(body(BASKETO, "2026-09-29", "09:00", "13:00"));
+        long second = createdId(body(BASKETO, "2026-09-29", "14:00", "15:00"));
+
+        mvc.perform(put("/api/entries/{id}", second).contentType(MediaType.APPLICATION_JSON)
+                        .content(body(BASKETO, "2026-09-29", "12:30", "15:00")))
+                .andExpect(status().isConflict());
+    }
+
+    @Test
+    void unknownEntryIsNotFound() throws Exception {
+        mvc.perform(put("/api/entries/{id}", 999).contentType(MediaType.APPLICATION_JSON)
+                        .content(body(BASKETO, "2026-09-29", "09:00", "13:00")))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value("Nie ma takiego wpisu."));
+        mvc.perform(delete("/api/entries/{id}", 999)).andExpect(status().isNotFound());
     }
 }
