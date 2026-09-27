@@ -1595,7 +1595,7 @@ git commit -m "feat: weekly calendar showing time entries"
 - Consumes: `api`, `Entry`, `EntryInput`, `Project` (`api.ts`), `toIsoDate`, `toHHmm`, `withinOneDay` (`time.ts`) — Task 6.
 - Produces: `EntryDialog` z propsami `{ projects: Project[]; initial: EntryInput; onDelete?: () => Promise<void>; onSave: (input: EntryInput) => Promise<void>; onClose: () => void }`. Jeśli `onSave`/`onDelete` rzuci błąd, okienko pokazuje jego komunikat i zostaje otwarte.
 
-- [ ] **Step 1: Dodaj okienko wpisu**
+- [x] **Step 1: Dodaj okienko wpisu**
 
 `frontend/src/EntryDialog.tsx`:
 
@@ -1680,7 +1680,7 @@ export function EntryDialog({ projects, initial, onDelete, onSave, onClose }: Pr
 }
 ```
 
-- [ ] **Step 2: Podłącz zaznaczanie i klikanie w kalendarzu**
+- [x] **Step 2: Podłącz zaznaczanie i klikanie w kalendarzu**
 
 `frontend/src/Timesheet.tsx` (cały plik):
 
@@ -1900,7 +1900,7 @@ button:disabled {
 }
 ```
 
-- [ ] **Step 3: Sprawdź typy i build**
+- [x] **Step 3: Sprawdź typy i build**
 
 Run: `cd frontend && npm run build`
 Expected: `tsc -b` bez błędów, `✓ built in ...`.
@@ -1920,12 +1920,12 @@ h. **Backend wyłączony:** zatrzymaj backend (Ctrl+C), kliknij „następny tyd
 i. **Trwałość:** odśwież stronę (F5) i zrestartuj backend. Expected: wszystkie zapisane bloki nadal są.
 j. **Usuwanie:** kliknij dowolny blok → „Usuń". Expected: blok znika.
 
-- [ ] **Step 5: Uruchom testy backendu na koniec**
+- [x] **Step 5: Uruchom testy backendu na koniec**
 
 Run: `cd backend && ./gradlew test`
 Expected: PASS — 21 testów.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd /home/dawid/projects/pomysly/poc/timesheet
