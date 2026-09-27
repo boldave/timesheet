@@ -170,7 +170,7 @@ git commit -m "chore: Spring Boot backend skeleton with PostgreSQL and Liquibase
 - Consumes: `TestcontainersConfiguration` (Task 1).
 - Produces: `public interface ProjectRepository extends JpaRepository<Project, Long>` (używane w Task 4 przez `existsById(Long)`). Projekty z seeda mają id 1 = „Basketo", 2 = „Hotelero", 3 = „Wewnętrzne" (tabela świeża, `generated always as identity`). JSON: `[{ "id": 1, "name": "Basketo", "color": "#2563eb" }, ...]` posortowane po `id`.
 
-- [ ] **Step 1: Napisz test, który pada**
+- [x] **Step 1: Napisz test, który pada**
 
 `backend/src/test/java/pl/dawid/timesheet/project/ProjectApiTest.java`:
 
@@ -212,12 +212,12 @@ class ProjectApiTest {
 
 Uwaga: w Spring Boot 4 `AutoConfigureMockMvc` jest w pakiecie `org.springframework.boot.webmvc.test.autoconfigure`.
 
-- [ ] **Step 2: Uruchom test i potwierdź, że pada**
+- [x] **Step 2: Uruchom test i potwierdź, że pada**
 
 Run: `cd backend && ./gradlew test --tests '*ProjectApiTest'`
 Expected: FAIL — `Status expected:<200> but was:<404>`.
 
-- [ ] **Step 3: Dodaj migrację z seedem**
+- [x] **Step 3: Dodaj migrację z seedem**
 
 `backend/src/main/resources/db/changelog/schema/001-project.sql`:
 
@@ -237,7 +237,7 @@ insert into project (name, color) values
     ('Wewnętrzne', '#9333ea');
 ```
 
-- [ ] **Step 4: Dodaj encję, repozytorium i kontroler**
+- [x] **Step 4: Dodaj encję, repozytorium i kontroler**
 
 `backend/src/main/java/pl/dawid/timesheet/project/Project.java`:
 
@@ -322,12 +322,12 @@ class ProjectController {
 }
 ```
 
-- [ ] **Step 5: Uruchom wszystkie testy i potwierdź, że przechodzą**
+- [x] **Step 5: Uruchom wszystkie testy i potwierdź, że przechodzą**
 
 Run: `cd backend && ./gradlew test`
 Expected: PASS — 2 testy (`contextLoads`, `listsTheSeededProjectsInOrder`).
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd /home/dawid/projects/pomysly/poc/timesheet
