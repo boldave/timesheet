@@ -50,7 +50,7 @@ Frontend nie ma testów automatycznych (decyzja ze specyfikacji), więc te przyp
 **Interfaces:**
 - Produces: klasa testowa `pl.dawid.timesheet.TestcontainersConfiguration` (**public**), importowana przez testy API w podpakietach: `@Import(TestcontainersConfiguration.class)`. Katalog `db/changelog/schema/` — każdy plik `NNN-nazwa.sql` w nim jest automatycznie dołączany (`includeAll`) w kolejności nazw.
 
-- [ ] **Step 1: Wygeneruj projekt Spring Boot**
+- [x] **Step 1: Wygeneruj projekt Spring Boot**
 
 ```bash
 cd /home/dawid/projects/pomysly/poc/timesheet
@@ -62,7 +62,7 @@ chmod +x backend/gradlew
 
 Sprawdź, że `backend/build.gradle` zawiera m.in.: `spring-boot-starter-webmvc`, `spring-boot-starter-data-jpa`, `spring-boot-starter-liquibase`, `spring-boot-starter-validation`, `developmentOnly 'org.springframework.boot:spring-boot-docker-compose'`, `runtimeOnly 'org.postgresql:postgresql'`, `spring-boot-testcontainers`, `testcontainers-postgresql`.
 
-- [ ] **Step 2: Utwórz `compose.yaml` w katalogu głównym repo**
+- [x] **Step 2: Utwórz `compose.yaml` w katalogu głównym repo**
 
 ```yaml
 services:
@@ -83,7 +83,7 @@ volumes:
 
 Nazwany wolumen trzyma dane między restartami. Port hosta jest losowy — Spring Boot sam go odczytuje.
 
-- [ ] **Step 3: Zastąp `TestcontainersConfiguration` wersją publiczną z `postgres:17`**
+- [x] **Step 3: Zastąp `TestcontainersConfiguration` wersją publiczną z `postgres:17`**
 
 `backend/src/test/java/pl/dawid/timesheet/TestcontainersConfiguration.java`:
 
@@ -108,12 +108,12 @@ public class TestcontainersConfiguration {
 }
 ```
 
-- [ ] **Step 4: Uruchom test i potwierdź, że pada**
+- [x] **Step 4: Uruchom test i potwierdź, że pada**
 
 Run: `cd backend && ./gradlew test`
 Expected: FAIL — `TimesheetApplicationTests > contextLoads()`, przyczyna w raporcie: `ChangeLogParseException: classpath:/db/changelog/db.changelog-master.yaml does not exist`.
 
-- [ ] **Step 5: Dodaj konfigurację aplikacji i changelog Liquibase**
+- [x] **Step 5: Dodaj konfigurację aplikacji i changelog Liquibase**
 
 `backend/src/main/resources/application.properties` (zastąp całą zawartość):
 
@@ -136,17 +136,17 @@ databaseChangeLog:
 
 Utwórz pusty plik `backend/src/main/resources/db/changelog/schema/.gitkeep`, żeby katalog trafił do repo.
 
-- [ ] **Step 6: Uruchom testy i potwierdź, że przechodzą**
+- [x] **Step 6: Uruchom testy i potwierdź, że przechodzą**
 
 Run: `cd backend && ./gradlew test`
 Expected: PASS — `BUILD SUCCESSFUL`, 1 test (`contextLoads`).
 
-- [ ] **Step 7: Sprawdź start aplikacji z docker compose**
+- [x] **Step 7: Sprawdź start aplikacji z docker compose**
 
 Run: `cd backend && ./gradlew bootRun`
 Expected: w logu `Started TimesheetApplication` i `Tomcat started on port 8081`; `docker ps` pokazuje kontener `timesheet-postgres-1`. Zatrzymaj Ctrl+C.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 cd /home/dawid/projects/pomysly/poc/timesheet

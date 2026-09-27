@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: 'postgres:17'
+    environment:
+      - 'POSTGRES_DB=timesheet'
+      - 'POSTGRES_PASSWORD=timesheet'
+      - 'POSTGRES_USER=timesheet'
+    ports:
+      - '5432'
+    volumes:
+      - 'timesheet-data:/var/lib/postgresql/data'
+
+volumes:
+  timesheet-data:
